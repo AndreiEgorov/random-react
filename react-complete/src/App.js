@@ -4,9 +4,25 @@ import "./App.css";
 
 class App extends Component {
   state = {
-    persons: [{ name: "Bob", age: 13 }, { name: "Dos", age: 14 }],
+    persons: [{ id:123, name: "Bob", age: 13 }, { id:2342, name: "Dos", age: 14 }],
     otherState: "Value 1"
   };
+
+  nameChangeHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id
+    })
+
+    const person = {...this.state.persons[personIndex]}
+    person.name = event.target.value
+    const persons = [...this.state.persons]
+    persons[personIndex] = person
+    this.setState({
+      persons: persons
+    })
+
+
+  }
 
 
   handleShowPersons = () => {
@@ -16,11 +32,16 @@ class App extends Component {
   };
 
   deletePerson = (index) => {
-    const persons = this.state.persons
-    persons.splice(index, 1)
+    console.log("index.", JSON.stringify(index))
+    console.log("0.", JSON.stringify(this.state.per))
+    const persons = this.state.persons.slice()
+    console.log("1.", JSON.stringify(persons))
+   
     this.setState({
-      persons: persons
+      persons:  persons.splice(index, 1)
     })  
+    console.log("2.", JSON.stringify(this.state.persons))
+    console.log("3.", JSON.stringify(persons))
   };
   render() {
     const style = {
@@ -41,6 +62,7 @@ class App extends Component {
                 key={index}
                 name={person.name}
                 age={person.age}
+                changed={(event)=> this.nameChangeHandler(event, person.id)}
               />
             );
           })}
