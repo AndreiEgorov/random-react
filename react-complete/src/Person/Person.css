@@ -1,0 +1,12 @@
+.Person{
+    width: 60%;
+    margin: 16px auto;
+    border: 1px solid grey;
+    box-shadow: 0 2px 3px grey;
+    padding: 16;
+    text-align: center;
+   
+}
+.test{
+    color: green;
+}

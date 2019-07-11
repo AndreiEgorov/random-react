@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import "./App.css";
 import Person from "./Person/Person";
+import "./App.css";
 
 class App extends Component {
   state = {
@@ -8,26 +8,51 @@ class App extends Component {
     otherState: "Value 1"
   };
 
-  nameSwitchHandler = (newName) => {
+
+  handleShowPersons = () => {
     this.setState({
-      persons: [{ name: newName, age: 453 }, { name: "ROB", age: 123 }],
-      otherState: "Value 5"
+      showPersons: !this.state.showPersons
     });
   };
 
+  deletePerson = (index) => {
+    const persons = this.state.persons
+    persons.splice(index, 1)
+    this.setState({
+      persons: persons
+    })  
+  };
   render() {
+    const style = {
+      backgroundColor: "white",
+      border: "1px solid blue",
+      padding: "8px"
+    };
+
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          {this.state.persons.map((person, index) => {
+            return (
+              <Person
+                click={() => this.deletePerson(index)}
+                key={index}
+                name={person.name}
+                age={person.age}
+              />
+            );
+          })}
+        </div>
+      );
+    }
     return (
       <div className="App">
-        <h1>Hello People</h1>
-        <button onClick={() => this.nameSwitchHandler("ALEX")}>Switch name</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.nameSwitchHandler.bind(this, "Mary")}
-        >
-          I like Running
-        </Person>
+        <button style={style} onClick={this.handleShowPersons}>
+          Switch name
+        </button>
+        {persons}
       </div>
     );
   }
