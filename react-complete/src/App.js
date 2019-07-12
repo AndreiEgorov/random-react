@@ -32,16 +32,11 @@ class App extends Component {
   };
 
   deletePerson = (index) => {
-    console.log("index.", JSON.stringify(index))
-    console.log("0.", JSON.stringify(this.state.per))
     const persons = this.state.persons.slice()
-    console.log("1.", JSON.stringify(persons))
-   
+    persons.splice(index, 1)
     this.setState({
-      persons:  persons.splice(index, 1)
+      persons: persons
     })  
-    console.log("2.", JSON.stringify(this.state.persons))
-    console.log("3.", JSON.stringify(persons))
   };
   render() {
     const style = {
