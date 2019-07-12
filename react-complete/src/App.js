@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Person from "./Person/Person";
 import "./App.css";
-import Radium from 'radium'
+import Radium, {StyleRoot} from "radium";
 
 class App extends Component {
   state = {
@@ -49,15 +49,15 @@ class App extends Component {
       fontSize: "20px",
       ":hover": {
         backgroundColor: "lightGreen",
-        color: 'orange'
+        color: "orange"
       }
     };
-    const classes = []
-    if (this.state.persons.length <= 2){
-      classes.push('red')
+    const classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push("red");
     }
-    if (this.state.persons.length <= 1){
-      classes.push('bold')
+    if (this.state.persons.length <= 1) {
+      classes.push("bold");
     }
 
     let persons = null;
@@ -65,9 +65,9 @@ class App extends Component {
     if (this.state.showPersons) {
       style.backgroundColor = "red";
       style[":hover"] = {
-        backgroundColor: 'salmon',
+        backgroundColor: "salmon",
         color: "black"
-      }
+      };
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
@@ -85,13 +85,15 @@ class App extends Component {
       );
     }
     return (
-      <div className="App">
-        <p className={classes.join(" ")}>Test TEXT </p>
-        <button style={style} onClick={this.handleShowPersons}>
-          Switch name
-        </button>
-        {persons}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <p className={classes.join(" ")}>Test TEXT </p>
+          <button style={style} onClick={this.handleShowPersons}>
+            Switch name
+          </button>
+          {persons}
+        </div>
+      </StyleRoot>
     );
   }
 }
