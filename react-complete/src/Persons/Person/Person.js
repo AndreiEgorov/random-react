@@ -8,11 +8,6 @@ const person = props => {
       width: "500px"
     }
   };
-  const rnd = Math.random();
-
-  if(rnd > 0.7){
-    throw new Error("Smthing is wrong")
-  }
 
   return (
     <div className="Person" style={style}>

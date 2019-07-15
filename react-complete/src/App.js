@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import Person from "./Person/Person";
+import Persons from "./Persons/Persons";
 import "./App.css";
 import Radium, { StyleRoot } from "radium";
-import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
 
 class App extends Component {
+
   state = {
     persons: [
       { id: 123, name: "Bob", age: 13 },
@@ -71,18 +71,12 @@ class App extends Component {
       };
       persons = (
         <div>
-          {this.state.persons.map((person, index) => {
-            return (
-              <ErrorBoundary key={index}>
-                <Person
-                  click={() => this.deletePerson(index)}
-                  name={person.name}
-                  age={person.age}
-                  changed={event => this.nameChangeHandler(event, person.id)}
-                />
-              </ErrorBoundary>
-            );
-          })}
+          <Persons
+            title={this.props.title}
+            persons={this.state.persons}
+            clicked={this.deletePerson}
+            changed={this.nameChangeHandler}
+          />
         </div>
       );
     }
@@ -93,6 +87,8 @@ class App extends Component {
           <button style={style} onClick={this.handleShowPersons}>
             Switch name
           </button>
+          {console.log("PERSONAS", persons)}
+          {console.log("STATE", this.state)}
           {persons}
         </div>
       </StyleRoot>
