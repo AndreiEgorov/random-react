@@ -4,7 +4,10 @@ import "./App.css";
 import Radium, { StyleRoot } from "radium";
 
 class App extends Component {
-
+  constructor(props) {
+    super(props);
+    console.log("Constructor created");
+  }
   state = {
     persons: [
       { id: 123, name: "Bob", age: 13 },
@@ -14,6 +17,12 @@ class App extends Component {
     otherState: "Value 1"
   };
 
+  static getDerivedStateFromProps = (props, state) => {
+    console.log("Get derived state from props", props, state);
+    return {
+      propsa: props
+    };
+  };
   nameChangeHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
@@ -41,7 +50,11 @@ class App extends Component {
       persons: persons
     });
   };
+  componentDidMount() {
+    console.log("Mounted");
+  }
   render() {
+    console.log("Rendering");
     const style = {
       backgroundColor: "green",
       border: "1px solid blue",
@@ -87,8 +100,6 @@ class App extends Component {
           <button style={style} onClick={this.handleShowPersons}>
             Switch name
           </button>
-          {console.log("PERSONAS", persons)}
-          {console.log("STATE", this.state)}
           {persons}
         </div>
       </StyleRoot>
