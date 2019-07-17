@@ -18,11 +18,24 @@ class App extends Component {
   };
 
   static getDerivedStateFromProps = (props, state) => {
-    console.log("Get derived state from props", props, state);
+    console.log("GET DERIVED STATE FROM PROPS STATE")
     return {
       propsa: props
     };
   };
+
+  shouldComponentUpdate(nextProps, nextState){
+ 
+    console.log("SHOULD COMPONENT UPDATE")
+    return true
+  }
+
+  componentDidUpdate(){
+    console.log("COMPONENT DID UPDATE")
+  }
+
+
+
   nameChangeHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
@@ -60,11 +73,11 @@ class App extends Component {
       border: "1px solid blue",
       padding: "8px",
       color: "white",
-      fontSize: "20px",
-      ":hover": {
-        backgroundColor: "lightGreen",
-        color: "orange"
-      }
+      fontSize: "20px"
+      // ":hover": {
+      //   backgroundColor: "lightGreen",
+      //   color: "orange"
+      // }
     };
     const classes = [];
     if (this.state.persons.length <= 2) {
@@ -78,10 +91,10 @@ class App extends Component {
 
     if (this.state.showPersons) {
       style.backgroundColor = "red";
-      style[":hover"] = {
-        backgroundColor: "salmon",
-        color: "black"
-      };
+      // style[":hover"] = {
+      //   backgroundColor: "salmon",
+      //   color: "black"
+      // };
       persons = (
         <div>
           <Persons
