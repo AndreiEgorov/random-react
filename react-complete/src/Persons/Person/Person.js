@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import classes from "./Person.css";
 import Radium from "radium";
 import Aux from "../../Aux/Aux";
+import hoc from "../../Aux/hoc";
 import WithClass from "../../Aux/WithClass";
 
 class Person extends Component {
@@ -12,7 +13,7 @@ class Person extends Component {
       }
     };
     return (
-      <WithClass classes={classes}>
+      <Aux>
         <div className="Person" style={style}>
           <h1  className="test" onClick={this.props.click}>
             My name is {this.props.name} and I am {this.props.age} years old
@@ -24,9 +25,9 @@ class Person extends Component {
             value={this.props.name}
           />
         </div>
-      </WithClass>
+      </Aux>
     );
   }
 }
 
-export default Radium(Person);
+export default hoc(Radium(Person), classes.Person);
