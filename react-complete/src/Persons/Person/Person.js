@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import "./Person.css";
+import classes from "./Person.css";
 import Radium from "radium";
 import Aux from "../../Aux/Aux";
+import WithClass from "../../Aux/WithClass";
 
 class Person extends Component {
   render() {
@@ -11,7 +12,7 @@ class Person extends Component {
       }
     };
     return (
-      <Aux>
+      <WithClass classes={classes}>
         <div className="Person" style={style}>
           <h1  className="test" onClick={this.props.click}>
             My name is {this.props.name} and I am {this.props.age} years old
@@ -23,7 +24,7 @@ class Person extends Component {
             value={this.props.name}
           />
         </div>
-      </Aux>
+      </WithClass>
     );
   }
 }
