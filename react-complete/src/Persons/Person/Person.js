@@ -4,6 +4,8 @@ import Radium from "radium";
 import Aux from "../../Aux/Aux";
 import hoc from "../../Aux/hoc";
 import WithClass from "../../Aux/WithClass";
+import PropTypes from 'prop-types';
+
 
 class Person extends Component {
   render() {
@@ -28,6 +30,14 @@ class Person extends Component {
       </Aux>
     );
   }
+}
+
+Person.propTypes = {
+  click: PropTypes.func,
+  age: PropTypes.number,
+  children: PropTypes.array,
+  changed: PropTypes.func,
+  name: PropTypes.string
 }
 
 export default hoc(Radium(Person), classes.Person);
