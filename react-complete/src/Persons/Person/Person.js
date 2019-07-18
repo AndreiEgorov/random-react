@@ -8,6 +8,15 @@ import PropTypes from 'prop-types';
 
 
 class Person extends Component {
+  constructor(props){
+    super(props);
+    this.inputElementRef = React.createRef()
+  }
+
+  componentDidMount(){
+    this.inputElementRef.current.focus()
+  }
+
   render() {
     const style = {
       "@media (min-width: 500px)": {
@@ -22,6 +31,10 @@ class Person extends Component {
           </h1>
           <h1>{this.props.children}</h1>
           <input
+            //old way ref
+            // ref={(inputEl)=> {this.inputElem = inputEl}}
+            //new way ref
+            ref={this.inputElementRef}
             type="text"
             onChange={this.props.changed}
             value={this.props.name}
