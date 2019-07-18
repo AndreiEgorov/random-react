@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Persons from "./Persons/Persons";
-import "./App.css";
+import classes from "./App.css";
 import Radium, { StyleRoot } from "radium";
+import hoc from "./Aux/hoc"
 
 class App extends Component {
   constructor(props) {
@@ -109,6 +110,7 @@ class App extends Component {
     return (
       <StyleRoot>
         <div className="App">
+
           <p className={classes.join(" ")}>Test TEXT </p>
           <button style={style} onClick={this.handleShowPersons}>
             Switch name
@@ -120,4 +122,4 @@ class App extends Component {
   }
 }
 
-export default Radium(App);
+export default  hoc(Radium(App), classes.App);
