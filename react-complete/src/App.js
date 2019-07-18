@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Persons from "./Persons/Persons";
 import classes from "./App.css";
 import Radium, { StyleRoot } from "radium";
-import hoc from "./Aux/hoc"
+import hoc from "./Aux/hoc";
 
 class App extends Component {
   constructor(props) {
@@ -15,27 +15,25 @@ class App extends Component {
       { id: 2342, name: "Dos", age: 14 },
       { id: 23422, name: "Robert", age: 15 }
     ],
-    otherState: "Value 1"
+    otherState: "Value 1",
+    charCounter: 0
   };
 
   static getDerivedStateFromProps = (props, state) => {
-    console.log("GET DERIVED STATE FROM PROPS STATE")
+    console.log("GET DERIVED STATE FROM PROPS STATE");
     return {
       propsa: props
     };
   };
 
-  shouldComponentUpdate(nextProps, nextState){
- 
-    console.log("SHOULD COMPONENT UPDATE")
-    return true
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("SHOULD COMPONENT UPDATE");
+    return true;
   }
 
-  componentDidUpdate(){
-    console.log("COMPONENT DID UPDATE")
+  componentDidUpdate() {
+    console.log("COMPONENT DID UPDATE");
   }
-
-
 
   nameChangeHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
@@ -46,8 +44,11 @@ class App extends Component {
     person.name = event.target.value;
     const persons = [...this.state.persons];
     persons[personIndex] = person;
-    this.setState({
-      persons: persons
+    this.setState((prevState, props) => {
+      return {
+        persons: persons,
+        charCounter: prevState.charCounter + 1
+      };
     });
   };
 
@@ -110,7 +111,6 @@ class App extends Component {
     return (
       <StyleRoot>
         <div className="App">
-
           <p className={classes.join(" ")}>Test TEXT </p>
           <button style={style} onClick={this.handleShowPersons}>
             Switch name
@@ -122,4 +122,4 @@ class App extends Component {
   }
 }
 
-export default  hoc(Radium(App), classes.App);
+export default hoc(Radium(App), classes.App);
